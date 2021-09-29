@@ -59,15 +59,24 @@ function buildCharts(sample) {
   // 2. Use d3.json to load and retrieve the samples.json file 
   d3.json("samples.json").then((data) => {
     // 3. Create a variable that holds the samples array. 
-      var sampleArray = data.samples;
+    var sampleArray = data.samples;
     // 4. Create a variable that filters the samples for the object with the desired sample number.
-      var filtedSample = sampleArray.filter(obj => obj.id == sample);
+    var filteredArray = sampleArray.filter(obj => obj.id == sample);
     //  5. Create a variable that holds the first sample in the array.
-    console.log(sampleArray);
-     // var sample1 = filtedSample[0];
+    console.log(filteredArray);
+    var filteredSample = filteredArray[0];
 
     // 6. Create variables that hold the otu_ids, otu_labels, and sample_values.
+    var plotValues = {};
+    var otu_ids_new = [];
+    for (var i=0; i<10; i++){
+      
+      otu_ids_new.push("OTU " + filteredSample.otu_ids[i])
+    };
 
+    plotValues["otu_ids_new"] = otu_ids_new.reverse();
+    plotValues["otu_values"] = filteredSample.sample_values.slice(0,10).reverse();
+    console.log(plotValues);
 
     // 7. Create the yticks for the bar chart.
     // Hint: Get the the top 10 otu_ids and map them in descending order  
@@ -76,12 +85,16 @@ function buildCharts(sample) {
     //var yticks = 
 
     // 8. Create the trace for the bar chart. 
-    //var barData = [0
-      
-    //];
+    var barData = [{
+      x: plotValues.otu_values,
+      y: plotValues.otu_ids_new,
+      type: "bar",
+      orientation: "h"
+    }     
+    ];
     // 9. Create the layout for the bar chart. 
     var barLayout = {
-      title: "Greek gods search results",
+      title: "OTU",
       margin: {
         l: 100,
         r: 100,
