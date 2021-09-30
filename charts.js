@@ -63,7 +63,7 @@ function buildCharts(sample) {
     // 4. Create a variable that filters the samples for the object with the desired sample number.
     var filteredArray = sampleArray.filter(obj => obj.id == sample);
     //  5. Create a variable that holds the first sample in the array.
-    console.log(filteredArray);
+    //console.log(filteredArray);
     var filteredSample = filteredArray[0];
 
     // 6. Create variables that hold the otu_ids, otu_labels, and sample_values.
@@ -75,8 +75,12 @@ function buildCharts(sample) {
     };
 
     plotValues["otu_ids_new"] = otu_ids_new.reverse();
+    plotValues["otu_labels"] = filteredSample.otu_labels.slice(0,10).reverse();
     plotValues["otu_values"] = filteredSample.sample_values.slice(0,10).reverse();
-    console.log(plotValues);
+
+    console.log(plotValues.otu_ids_new);
+    console.log(plotValues.otu_labels);
+    console.log(plotValues.otu_values);
 
     // 7. Create the yticks for the bar chart.
     // Hint: Get the the top 10 otu_ids and map them in descending order  
@@ -94,7 +98,7 @@ function buildCharts(sample) {
     ];
     // 9. Create the layout for the bar chart. 
     var barLayout = {
-      title: "OTU",
+      //title: "OTU",
       margin: {
         l: 100,
         r: 100,
